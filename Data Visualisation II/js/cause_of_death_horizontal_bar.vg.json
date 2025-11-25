@@ -1,0 +1,57 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "title": "Global Causes of Death",
+  "background": "antiquewhite",
+  "data": {
+    "url": "data/cause-of-death-world.csv"
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2023,
+      "bind": {
+        "input": "range",
+        "min": 1980,
+        "max": 2023,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.year == Year_selection"},
+    {"filter": "datum.metric == 'Number'"}
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "val",
+      "type": "quantitative",
+      "title": "Number of Deaths",
+      "axis": {"tickCount": 20},
+      "scale": {"domain": [0, 20000000]}
+    },
+    "y": {
+      "field": "cause",
+      "type": "nominal",
+      "sort": {"field": "val", "order": "descending"},
+      "title": null
+    },
+    "tooltip": [
+      {"field": "cause", "type": "ordinal", "title": "Cause of Death"},
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {
+        "field": "val",
+        "type": "quantitative",
+        "format": ",.0f",
+        "title": "Number of Deaths"
+      }
+    ]
+  },
+  "config": {
+  "view": {
+     "stroke": "transparent"
+  }
+}
+}

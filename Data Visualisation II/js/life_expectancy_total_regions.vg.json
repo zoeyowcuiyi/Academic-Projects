@@ -1,0 +1,163 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 260,
+  "background": "antiquewhite",
+  "data": {
+    "url": "data/total-life-expectancy-at-birth-regions.csv"
+  },
+  "transform": [{"filter": {"field": "Year", "oneOf": [1960, 2023]}}],
+  "encoding": {
+    "x": {
+      "field": "Period life expectancy at birth",
+      "type": "quantitative",
+      "title": "Life Expectancy at birth (years)"
+    },
+    "y": {
+      "field": "Entity",
+      "type": "nominal",
+      "title": "Region"
+    }
+  },
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "detail": {"field": "Entity", "type": "nominal"},
+        "color": {"value": "#db646f"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true},
+      "encoding": {
+        "color": {
+          "field": "Year",
+          "type": "nominal",
+          "scale": {"range": ["#8B0000", "#FF5733"]},
+          "title": "Year"
+        },
+        "size": {"value": 100},
+        "opacity": {"value": 1},
+        "tooltip": [
+        {"field": "Entity", "type": "ordinal", "title": "Region"},
+        {"field": "Year", "type": "ordinal", "title": "Year"},
+        {
+          "field": "Period life expectancy at birth",
+          "type": "quantitative",
+          "format": ".1f",
+          "title": "Total Life Expectancy at birth (years)"
+      }
+    ]
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "Africa has the lowest"},
+        "x": {"value": 90},
+        "y": {"value": 30}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "life expectancy but"},
+        "x": {"value": 90},
+        "y": {"value": 43}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "has improved greatly"},
+        "x": {"value": 90},
+        "y": {"value": 55}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "throughout the years."},
+        "x": {"value": 90},
+        "y": {"value": 67}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "Asia was the second"},
+        "x": {"value": 90},
+        "y": {"value": 105}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "lowest in 1960, but it"},
+        "x": {"value": 90},
+        "y": {"value": 117}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "has the greatest"},
+        "x": {"value": 90},
+        "y": {"value": 129}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "improvement across"},
+        "x": {"value": 90},
+        "y": {"value": 141}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "regions overtime."},
+        "x": {"value": 90},
+        "y": {"value": 153}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "Europe was the"},
+        "x": {"value": 90},
+        "y": {"value": 190}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "highest in 1960, but"},
+        "x": {"value": 90},
+        "y": {"value": 203}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "now Oceania has"},
+        "x": {"value": 90},
+        "y": {"value": 215}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "taken the lead."},
+        "x": {"value": 90},
+        "y": {"value": 227}
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "background":"antiquewhite",
+  "data": {"url": "data/mens-life-expectancy-at-birth.csv"},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2023,
+      "bind": {
+        "input": "range",
+        "min": 1960,
+        "max": 2023,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Year == Year_selection"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "Life expectancy - Sex: male - Age: 0 - Variant: estimates",
+      "title": "Life Expectancy at birth (years)",
+      "bin": {
+        "step": 10,                 
+        "extent": [10, 90],        
+        "nice": false              
+      },
+      "scale": {"domain": [10, 90]}, 
+      "axis": {"labelFlush": true}
+    },
+    "y": {
+      "aggregate": "count",
+      "title": "Number of Countries",
+      "scale": {"domain": [0, 120]}
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "color":{"value": "#F52727"},
+        "tooltip": [
+          {"aggregate": "count", "type": "quantitative", "format": ",", "title": "Number of Countries"},
+          {"field": "Sex_Label", "type": "nominal", "title": "Gender"},
+          {"field": "Year", "type": "quantitative", "title": "Year"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "More countries started"},
+        "x": {"value": 130},
+        "y": {"value": 100}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "achieving higher male life"},
+        "x": {"value": 130},
+        "y": {"value": 112}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "expectancy as the years"},
+        "x": {"value": 130},
+        "y": {"value": 124}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "went by."},
+        "x": {"value": 130},
+        "y": {"value": 136}
+      }
+    }
+  ],
+  "config": {
+  "view": {
+     "stroke": "transparent"
+  }
+}
+}

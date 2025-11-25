@@ -1,0 +1,99 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Global Share of Deaths (%) by Age Group",
+  "width": 300,
+  "height": 290,
+  "background": "antiquewhite",
+  "data": { "url": "data/share-of-death-world.csv" },
+
+  "params": [
+    {
+      "name": "yearParam",
+      "value": 2023,
+      "bind": { "input": "range", "min": 1980, "max": 2023, "step": 1 , "name": "Select Year: "}
+    }
+  ],
+  "transform": [
+    {
+      "joinaggregate": [
+        { "op": "sum", "field": "val", "as": "year_total" }
+      ],
+      "groupby": ["year"]
+    },
+    { "calculate": "datum.val / datum.year_total * 100", "as": "share_pct" },
+    { "filter": "datum.year == yearParam" }
+  ],
+
+  "encoding": {
+    "theta": { "field": "share_pct", "type": "quantitative", "stack": true },
+    "color": {
+      "field": "age_name", "type": "nominal",
+      "title": "Age group",
+      "scale": { 
+        "domain": [
+          "<5 years",
+          "5-14 years",
+          "15-49 years",
+          "50-69 years",
+          "<70 years"
+        ],
+        "range": [
+          "#e41a1c",
+          "#984ea3",
+          "#ff7f00",
+          "#89d3df",
+          "#377eb8"] 
+        },
+      "legend": { "orient": "right" }
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "arc", "innerRadius": 70, "outerRadius": 130, "stroke": "white" },
+      "encoding": {
+        "tooltip": [
+          { "field": "age_name", "title": "Age group" },
+          { "field": "val", "title": "Number of Deaths", "format": ",.0f" },
+          { "field": "share_pct", "title": "Share (%)", "format": ".1f" },
+          { "field": "year", "title": "Year" }
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -20, "dx": -50, "align": "left"},
+      "encoding": {
+        "text": {"value": "People aged 70 and"},
+        "color": {"value": "black"}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -20, "dx": -50, "align": "left"},
+      "encoding": {
+        "text": {"value": "above consistently"},
+        "color": {"value": "black"},
+        "y": {"value": 157}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -20, "dx": -50, "align": "left"},
+      "encoding": {
+        "text": {"value": "account for half of all"},
+        "color": {"value": "black"},
+        "y": {"value": 170}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -20, "dx": -50, "align": "left"},
+      "encoding": {
+        "text": {"value": "global deaths."},
+        "color": {"value": "black"},
+        "y": {"value": 183}
+      }
+    }
+  ],
+  "config": {
+  "view": {
+     "stroke": "transparent"
+  }
+}
+}

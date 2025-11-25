@@ -1,0 +1,176 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/zoeyow/3179/refs/heads/main/HomeworkWeek10/data/life-expectancy-un-vs-gdp-per-capita-wb.csv"
+  },
+  "params": [
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,
+        "step": 1000000,
+        "name": "Minimum Population: "
+      }
+    },
+    {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "labels":[
+          "Show All",
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum['Population (historical)'] > Population_Above"},
+    {
+      "filter": "Continent_selection == null || datum['World regions according to OWID'] == Continent_selection"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "GDP per capita, PPP (constant 2021 international $)",
+      "type": "quantitative",
+      "title": "GDP per capita ($)"
+    },
+    "y": {
+      "field": "Life expectancy - Sex: all - Age: 0 - Variant: estimates",
+      "type": "quantitative",
+      "title": "Total Life Expectancy at birth (years)",
+      "axis": {"tickCount": 6},
+      "scale": {"domain": [50, 100]}
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+        "name": "grid",
+        "select": "interval",
+        "bind": "scales"
+        },
+        {
+        "name": "continent_highlight",
+        "select": {"type": "point", "fields": ["World regions according to OWID"]},
+        "bind": "legend"
+        },
+        {
+        "name": "highlight",
+        "select": {"type": "point", "on": "mouseover"}
+        }
+      ],
+      "mark": {
+      "type": "circle",
+      "stroke": "black",
+      "strokeWidth": 1
+      },
+      "encoding": {
+        "size": {
+          "condition": {
+            "param": "highlight",
+            "empty": false,
+            "value": 500
+          },
+          "field": "Population (historical)",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+            "range": [50, 120, 200, 300, 400, 500]
+          },
+          "legend": {"format": ".1s"},
+          "title": "Population"
+        },
+        "color": {
+          "field": "World regions according to OWID",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "North America",
+              "South America",
+              "Europe",
+              "Africa",
+              "Asia",
+              "Oceania"
+            ],
+            "range": [
+              "#e41a1c",
+              "#984ea3",
+              "#ff7f00",
+              "#89d3df",
+              "#377eb8",
+              "#a65628"
+            ]
+          },
+          "title": "Continent"
+        },
+        "opacity": {
+          "condition": {"param": "continent_highlight", "value": 0.7},
+          "value": 0.05
+        },
+        "strokeOpacity": {
+          "condition": [
+            {
+              "param": "highlight",
+              "empty": false,
+              "value": 1
+            }
+          ],
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Entity", "type": "nominal", "title": "Country"},
+          {"field": "GDP per capita, PPP (constant 2021 international $)", "type": "quantitative", "format": ",.2f", "title": "GDP per capita ($)"},
+          {"field": "Life expectancy - Sex: all - Age: 0 - Variant: estimates", "type": "quantitative", "format": ",.1f", "title": "Total Life Expectancy at birth (years)"},
+          {"field": "Population (historical)", "type": "quantitative", "format": ",.1s", "title": "Population"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Entity", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+              "test": "datum.Entity == 'Brazil' || datum.Entity == 'Ecuador' || datum.Entity == 'Tanzania' || datum.Entity == 'New Zealand' || datum.Entity == 'Singapore' || datum.Entity == 'China' || datum.Entity == 'India' ||  datum.Entity == 'South Korea' ||  datum.Entity == 'Haiti'",
+              "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+  ],
+    "config": {
+        "background": "antiquewhite"
+      }
+}

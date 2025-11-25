@@ -1,0 +1,354 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "background":"antiquewhite",
+  "data": {"url": "data/total-life-expectancy-at-birth-countries.csv"},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2023,
+      "bind": {"input": "range", "min": 1960, "max": 2023, "step": 1, "name": "Select Year: "}
+      }
+  ],
+  "transform": [
+    {"filter": "datum.TIME_PERIOD == Year_selection"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "OBS_VALUE",
+      "title": "Life Expectancy at birth (years)",
+      "bin": {
+        "step": 10,                 
+        "extent": [10, 90],        
+        "nice": false            
+      },
+      "scale": {"domain": [10, 90]}, 
+      "axis": {"labelFlush": true}
+    },
+    "y": {
+      "aggregate": "count",
+      "title": "Number of Countries",
+      "scale": {"domain": [0, 120]}
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "color":{"value": "#F57927"},
+        "tooltip": [
+          {"aggregate": "count", "type": "quantitative", "format": ",", "title": "Number of Countries"},
+          {"field": "SEX_LABEL", "type": "nominal", "title": "Gender"},
+          {"field": "TIME_PERIOD", "type": "quantitative", "title": "Year"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "A sudden drop in life"},
+        "x": {"value": 150},
+        "y": {"value": 30},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2021",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "expectancy could be"},
+        "x": {"value": 150},
+        "y": {"value": 43},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2021",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "affected by the number"},
+        "x": {"value": 150},
+        "y": {"value": 56},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2021",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "of deaths from COVID-19."},
+        "x": {"value": 150},
+        "y": {"value": 69},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2021",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "In 1960, only"},
+        "x": {"value": 150},
+        "y": {"value": 30},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 1960",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "several countries could"},
+        "x": {"value": 150},
+        "y": {"value": 43},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 1960",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "achieve a 70-80 life"},
+        "x": {"value": 150},
+        "y": {"value": 56},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 1960",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "expectancy."},
+        "x": {"value": 150},
+        "y": {"value": 69},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 1960",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "From 1992 onwards,"},
+        "x": {"value": 150},
+        "y": {"value": 30},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 1992",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "countries started acheiving"},
+        "x": {"value": 150},
+        "y": {"value": 43},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 1992",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "80-90 in life expectancy"},
+        "x": {"value": 150},
+        "y": {"value": 56},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 1992",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "In 2002-2003, it had the highest"},
+        "x": {"value": 150},
+        "y": {"value": 30},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2002 || datum.TIME_PERIOD == 2001 || datum.TIME_PERIOD == 2003",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "number of countries to"},
+        "x": {"value": 150},
+        "y": {"value": 43},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2002 || datum.TIME_PERIOD == 2001 || datum.TIME_PERIOD == 2003",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "achieve a life expectancy"},
+        "x": {"value": 150},
+        "y": {"value": 56},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2002 || datum.TIME_PERIOD == 2001 || datum.TIME_PERIOD == 2003",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "between 70-80 years."},
+        "x": {"value": 150},
+        "y": {"value": 69},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2002 || datum.TIME_PERIOD == 2001 || datum.TIME_PERIOD == 2003",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "There are no countries"},
+        "x": {"value": 150},
+        "y": {"value": 30},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2023",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "with a life expectacy"},
+        "x": {"value": 150},
+        "y": {"value": 43},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2023",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "smaller than 50 years."},
+        "x": {"value": 150},
+        "y": {"value": 56},
+        "opacity": {
+          "condition": {
+            "test": "datum.TIME_PERIOD == 2023",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "More countries started"},
+        "x": {"value": 150},
+        "y": {"value": 100}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "achieving higher life"},
+        "x": {"value": 150},
+        "y": {"value": 112}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "expectancy as the years"},
+        "x": {"value": 150},
+        "y": {"value": 124}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -35, "dx": -40, "align": "left"},
+      "encoding": {
+        "text": {"value": "went by."},
+        "x": {"value": 150},
+        "y": {"value": 136}
+      }
+    }
+  ],
+  "config": {
+  "view": {
+     "stroke": "transparent"
+  }
+}
+}

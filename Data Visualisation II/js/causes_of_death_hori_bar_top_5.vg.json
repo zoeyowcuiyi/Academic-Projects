@@ -1,0 +1,92 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 420,
+  "title": "Top 10 Global Causes of Death",
+  "background": "antiquewhite",
+  "data": {"url": "data/cause-of-death-world.csv"},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2023,
+      "bind": {"input": "range", "min": 1980, "max": 2023, "step": 1, "name": "Select Year: "}
+    }
+  ],
+  "transform": [
+    {"filter": "datum.year == Year_selection"},
+    {"filter": "datum.metric == 'Number'"},
+    {
+      "aggregate": [{"op": "sum", "field": "val", "as": "total_deaths"}],
+      "groupby": ["cause"]
+    },
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "total_deaths", "order": "descending"}]
+    },
+    {"filter": "datum.rank <= 10"}
+  ],
+  "encoding": {
+    "x": {"field": "total_deaths", "type": "quantitative", "title": "Number of Deaths", "axis": {"tickCount": 10}},
+    "y": {"field": "cause", "type": "nominal", "sort": "-x", "title": null}
+  },
+  "layer": [
+    {
+        "mark": "bar",
+        "encoding": {
+          "tooltip": [
+            {"field": "cause", "title": "Cause of Death"},
+            {"field": "total_deaths", "type": "quantitative", "format": ",.0f", "title": "Number of Deaths"}
+          ]
+        }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dx": -10, "align": "left"},
+      "encoding": {
+        "text": {"value": "Cardiovascular"},
+        "x": {"value": 150},
+        "y": {"value": 200}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dx": -10, "align": "left"},
+      "encoding": {
+        "text": {"value": "diseases has"},
+        "x": {"value": 150},
+        "y": {"value": 212}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dx": -10, "align": "left"},
+      "encoding": {
+        "text": {"value": "consistently"},
+        "x": {"value": 150},
+        "y": {"value": 224}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dx": -10, "align": "left"},
+      "encoding": {
+        "text": {"value": "account for millions"},
+        "x": {"value": 150},
+        "y": {"value": 236}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dx": -10, "align": "left"},
+      "encoding": {
+        "text": {"value": "of deaths over"},
+        "x": {"value": 150},
+        "y": {"value": 248}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dx": -10, "align": "left"},
+      "encoding": {
+        "text": {"value": "the years."},
+        "x": {"value": 150},
+        "y": {"value": 260}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": "transparent"}}
+}

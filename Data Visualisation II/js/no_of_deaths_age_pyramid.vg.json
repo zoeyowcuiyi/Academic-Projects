@@ -1,0 +1,258 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "background":"antiquewhite",
+  "data": {
+    "url": "data/number-of-deaths-world.csv"
+  },
+  "params": [
+    {
+      "name": "Year",
+      "value": 2023,
+      "bind": {"input": "range", "min": 1990, "max": 2023, "step": 1, "name": "Select Year: "}
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Time == Year"},
+    {
+      "aggregate": [{"op": "sum", "field": "Value", "as": "Deaths"}],
+      "groupby": ["Time", "Sex", "Age", "AgeStart"]
+    },
+    {
+      "calculate": "datum.Sex === 'Male' ? -datum.Deaths : datum.Deaths",
+      "as": "SignedDeaths"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "Age",
+      "type": "ordinal",
+      "sort": {"field": "AgeStart", "order": "descending"},
+      "title": "Age group"
+    },
+    "x": {
+      "field": "SignedDeaths",
+      "type": "quantitative",
+      "title": "Deaths",
+      "scale": {"domain": [-7000000, 7000000]},
+      "axis": {
+        "labelExpr": "abs(datum.value)",
+        "format": ","
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "color": {
+          "field": "Sex",
+          "type": "nominal",
+          "scale": {"range": ["#E15759", "#4C78A8"]},
+          "title": "Sex"
+        },
+        "tooltip": [
+          {"field": "Age", "title": "Age"},
+          {"field": "Sex", "title": "Sex"},
+          {"field": "Deaths", "type": "quantitative", "title": "Deaths", "format": ",.0f"},
+          {"field": "Time", "title": "Year"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "The number of deaths"},
+        "x": {"value": 80},
+        "y": {"value": 100}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "for age groups above 50"},
+        "x": {"value": 80},
+        "y": {"value": 112}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "has increased since 1990,"},
+        "x": {"value": 80},
+        "y": {"value": 124}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "especially the 70-74 age"},
+        "x": {"value": 80},
+        "y": {"value": 136}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "group for the male"},
+        "x": {"value": 80},
+        "y": {"value": 148}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "population, and the 80-84"},
+        "x": {"value": 80},
+        "y": {"value": 160}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "age group for the female"},
+        "x": {"value": 80},
+        "y": {"value": 172}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "population."},
+        "x": {"value": 80},
+        "y": {"value": 184}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "Infant mortality and"},
+        "x": {"value": 80},
+        "y": {"value": 350}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "the mortality of children"},
+        "x": {"value": 80},
+        "y": {"value": 362}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "age 0-4 has decreased by"},
+        "x": {"value": 80},
+        "y": {"value": 374}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "a significant amount."},
+        "x": {"value": 80},
+        "y": {"value": 386}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "since 1990."},
+        "x": {"value": 80},
+        "y": {"value": 398}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "The number of deaths"},
+        "x": {"value": 650},
+        "y": {"value": 100}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "are generally higher"},
+        "x": {"value": 650},
+        "y": {"value": 112}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "for males than females"},
+        "x": {"value": 650},
+        "y": {"value": 124}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "which further proves the"},
+        "x": {"value": 650},
+        "y": {"value": 136}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "previous point about"},
+        "x": {"value": 650},
+        "y": {"value": 148}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "higher life expectancy"},
+        "x": {"value": 650},
+        "y": {"value": 160}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "for females"},
+        "x": {"value": 650},
+        "y": {"value": 172}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "The population age between"},
+        "x": {"value": 650},
+        "y": {"value": 350}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "5-34 has extremely"},
+        "x": {"value": 650},
+        "y": {"value": 362}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "low mortality rates"},
+        "x": {"value": 650},
+        "y": {"value": 374}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10, "dx": -60, "align": "left"},
+      "encoding": {
+        "text": {"value": "since 1990."},
+        "x": {"value": 650},
+        "y": {"value": 386}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Global Life Expectancy & Mortality Analysis</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>Global Life Expectancy & Mortality Analysis</h1>
+      </div>
+      <div class="pure-u-1-2">
+        <p style="text-align: left; margin-left: 20px; padding-bottom: 15px;">
+          Understanding how long people live and why they don’t, offers 
+          powerful insights into global health, development, and inequality.
+        </p>
+      </div>
+      <div class="pure-u-1-2">
+        <p style="text-align: left; padding-bottom: 15px;">
+          This analysis explores global trends in life expectancy and causes 
+          of death, revealing how development shape human longevity.
+          Dive into the data to uncover patterns that tell the story 
+          of progress and challenges of global well-being.
+        </p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Overview of Life Expectancy</h2>
+        </div>
+        <div class="tab-container">
+          <button class="tablinks" onclick="openMap(event, 'vis1')">Total</button>
+          <button class="tablinks" onclick="openMap(event, 'MaleMap')">Male</button>
+          <button class="tablinks" onclick="openMap(event, 'FemaleMap')">Female</button>
+        </div>
+        <div id="vis1" class="tabcontent"></div>
+        <div id="MaleMap" class="tabcontent"></div>
+        <div id="FemaleMap" class="tabcontent"></div>
+      </div>
+      
+    <script>
+      var specVis1 = "js/life_expectancy_total_map.vg.json";
+      var specLifeExpectancyMaleMap = "js/life_expectancy_male_map.vg.json";
+      var specLifeExpectancyFemaleMap = "js/life_expectancy_female_map.vg.json";
+
+      // Map container IDs to their corresponding specs
+      const specsById = {
+        vis1: specVis1,
+        MaleMap: specLifeExpectancyMaleMap,
+        FemaleMap: specLifeExpectancyFemaleMap
+      };
+
+      function openMap(evt, mapName) {
+        // Hide all tab contents
+        const tabcontent = document.getElementsByClassName("tabcontent");
+        for (let i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        // Remove "active" class from all buttons
+        const tablinks = document.getElementsByClassName("tablinks");
+        for (let i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the selected tab (use the correct variable: mapName)
+        const container = document.getElementById(mapName);
+        if (!container) {
+          console.error("No container with id:", mapName);
+          return;
+        }
+        container.style.display = "block";
+
+        // Add "active" class to the clicked button
+        if (evt && evt.currentTarget) {
+          evt.currentTarget.className += " active";
+        }
+
+        // Embed the appropriate spec into the selected container
+        const spec = specsById[mapName];
+        if (!spec || Object.keys(spec).length === 0) {
+          console.warn(`No spec found for '${mapName}'. Did you define it?`);
+          container.innerHTML = "";
+          return;
+        }
+
+        // Render with vega-embed
+        vegaEmbed('#' + mapName, spec, { actions: false })
+          .catch(err => console.error("vegaEmbed error:", err));
+      }
+
+      // Open the default tab on load (first button)
+      document.addEventListener('DOMContentLoaded', () => {
+        const firstBtn = document.querySelector('.tablinks');
+        if (firstBtn) {
+          firstBtn.click();
+        }
+      });
+    </script>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Life Expectancy Then vs. Now</h2>
+        </div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-left", style="padding: 20px;">
+          <p>Compared to our ancestors in 1960, our life expectancy has increased by over 50%. </p> 
+          <p>This remarkable increase is due to improved living standards, like better 
+            nutrition and sanitation, and advances in healthcare, such as antibiotics and vaccines.</p>
+        </div>
+      </div>
+      <div class="pure-u-2-3">
+        <div id="vis2" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Distribution of Life Expectancy</h2>
+        </div>
+      </div>
+      <div class="pure-u-2-3">
+        <div id="hist-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="selector-container">
+          <select id="histSelector">
+            <option value="Total" selected>Total</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="description description-right", style="padding: 20px;">
+          <p>In 2023, most of the countries have a life expectancy between 
+            70-80 and many reaching 80-90. Moreover, it can be said that females 
+            generally lived slightly longer than males, but both distributions are similar.</p>
+        </div>
+      </div>
+      <script>
+        const histSelector = document.getElementById("histSelector");
+        const histContainer = document.getElementById("hist-container");
+
+        // Add an event listener to the drop-down menu
+        histSelector.addEventListener("change", () => {
+          const selectedHist = histSelector.value;
+          histContainer.innerHTML = "";
+
+          if (selectedHist === "Total") {
+            vegaEmbed(histContainer, specVis3, {actions: false});
+          } else if (selectedHist === "Male") {
+            vegaEmbed(histContainer, specMaleHistogram, {actions: false});
+          } else if (selectedHist === "Female") {
+            vegaEmbed(histContainer, specFemaleHistogram, {actions: false});
+          }
+        });
+
+        // Display default map on page load
+        window.addEventListener("load", () => {
+          histSelector.value = "Total";
+          vegaEmbed(histContainer, specVis3, {actions: false}).then(function(result) {}).catch(console.error);
+        });
+      </script>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Overview of Mortality</h2>
+        </div>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="vis4" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+    
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Global Causes of Death Breakdown</h2>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div class="description description-left", style="padding: 20px; padding-top: 0%;">
+          <p>Every number here tells a story about the world’s health challenges. 
+            On the right, the bar chart reveals the causes responsible for millions 
+            of lives lost each year. On the left, the donut chart highlights how 
+            aging populations shape healthcare priorities worldwide.</p>
+        </div>
+        <div id="vis6" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="vis5" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Life Expectancy vs. GDP per capita (2023)</h2>
+        </div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <p>
+            This chart reveals the strong link between wealth and 
+            health, but also the exceptions that challenge the rule.
+          </p>
+        </div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <p>
+            Most countries follow an upward curve: higher GDP per 
+            capita often means longer life expectancy. Meanwhile, 
+            countries with low GDP and shorter lifespans underscore 
+            persistent global inequalities.
+          </p>
+        </div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <p>
+            Use the filters to explore how continents and population 
+            sizes shape these patterns, and consider what drives success 
+            beyond wealth.
+          </p>
+        </div>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="vis7" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <div class="pure-g", style="margin: 0%; background-color: white;">
+      <div class="pure-u-1-1 small-font">
+        <p>This visualisation is created by <a href="https://github.com/zoeyow/3179/tree/main/FIT3179Assignment2" target="_blank">FIT3179
+            Zoe Yow</a>. The datasource is <a href="https://ghdx.healthdata.org/" target=" _blank">Global Health Data Exchange (GHDx)</a>, 
+            <a href="https://ourworldindata.org" target=" _blank">Our World in Data</a>, and 
+            <a href="https://www.worldbank.org/ext/en/home" target=" _blank">World Bank Group</a>.</p>
+      </div>
+    </div>
+
+  </div> <!-- end page -->
+
+  <script type="text/javascript">
+    var specVis2 = "js/life_expectancy_total_regions.vg.json"
+    var specVis3 = "js/life_expectancy_total_histogram.vg.json"
+    var specMaleHistogram = "js/life_expectancy_male_histogram.vg.json"
+    var specFemaleHistogram = "js/life_expectancy_female_histogram.vg.json"
+    var specVis4 = "js/no_of_deaths_age_pyramid.vg.json"
+    var specVis5 = "js/causes_of_death_hori_bar_top_5.vg.json"
+    var specVis6 = "js/share_of_death_donut.vg.json"
+    var specVis7 = "js/life_expectancy_vs_gdp.vg.json"
+
+    vegaEmbed('#vis2', specVis2, { "actions": false });
+
+    vegaEmbed('#vis4', specVis4, { "actions": false });
+
+    vegaEmbed('#vis5', specVis5, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis6', specVis6, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis7', specVis7, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+  </script>
+</body>
+
+</html>

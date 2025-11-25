@@ -1,0 +1,96 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 400,
+  "projection": {"type": "equalEarth"},
+  "background":"antiquewhite",
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2023,
+      "bind": {"input": "range", "min": 1960, "max": 2023, "step": 1, "name": "Select Year: "}
+    }
+  ],
+
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "transform": [
+        {"calculate": "'Data is not available in ' + datum.properties.NAME", "as": "note"}
+      ],
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
+      "encoding": {"tooltip": {"field": "note"}}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/zoeyow/3179/main/HomeworkWeek10/data/womens-life-expectancy-at-birth.csv"
+      },
+      "transform": [
+        {"filter": "datum.Year == Year_selection"},
+        {
+          "lookup": "Code",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+              "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+            },
+            "key": "properties.ADM0_A3",
+            "fields": ["properties", "geometry"]
+          }
+        }
+      ],
+      "mark": {"type": "geoshape", "stroke": "white"},
+      "encoding": {
+        "shape": {"field": "geometry", "type": "geojson"},
+        "color": {
+          "field": "Life expectancy - Sex: female - Age: 0 - Variant: estimates",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [20, 40, 60, 80, 100],
+            "range": ["#DCBBFC", "#C68FFA", "#9127F5", "#6C09C8", "#54079C", "#3C0570"]
+          },
+          "legend": {
+            "title": "Life Expectancy at birth (years)",
+            "titleFontSize": 13,
+            "labelFontSize": 11,
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+          {
+            "field": "Life expectancy - Sex: female - Age: 0 - Variant: estimates",
+            "type": "quantitative",
+            "title": "Life Expectancy at birth (years)",
+            "format": ".1f"
+          },
+          {"field": "Sex_Label", "type": "nominal", "title": "Gender"},
+          {"field": "Year", "type": "ordinal", "title": "Year"}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}
