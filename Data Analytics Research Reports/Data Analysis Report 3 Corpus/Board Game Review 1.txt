@@ -1,0 +1,52 @@
+Board Game Review: Codenames
+
+It has been awhile since I have done a board game review, but recently I have played a pretty entertaining game, Codenames. This is a word game, and while the rules are very simple, actual gameplay can be quite tricky. Let me get started with explaining the rules of the game.
+
+The game comes with several hundred cards, each containing a word. Some examples could be “tree”, “court”, or “link.” These word cards are chosen at random, and put into a 5 by 5 grid, having a table of 25 words.
+
+The next part of set up is deciding teams. There are two teams, a Red Team and Blue Team. After that, each team needs to decide on a “Spymaster.” This Spymaster will be giving clues to their team to try to get them to guess the words on the grid.
+
+How do the teams figure out their words? The Spymasters share a card, which shows a grid representing the layout of the 5 by 5 grid of words, and that card has specific squares colored either Red, Blue, or Tan, and one Black spot. The Black spot is the “assassin” who causes an automatic loss for the team that makes a guess of that word card/spot. On each card, there are either 8 or 9 blue and red squares, and the team with more of their color has to go first.
+
+So how do you get people to guess your words in Codenames? Spymasters are trying to give clues to their teammates. On a team’s turn, the Spymaster can only say two things: one single word, and one number. That single word given is chosen by trying to relate as many words as possible together for that team, while also making sure it doesn’t accidentally cross over with words that don’t belong to them. The number signifies how many words are associated with the 1-word clue given to the team.
+
+Once the clue is given, the team can discuss with their other teammates (but not with the Spymaster) which words they think are the correct answer. Once the team has come to a conclusion, they provide their answers one at a time. The Spymaster then indicates whether that answer is correct or not.
+
+If it is correct, then the Spymaster covers the word with a colored rectangle piece matching their team color. The team can then make another guess if they have more to make.
+
+If they guess incorrectly, the tile is covered with a Tan marker if it is neither team’s word, the opposing team’s marker if it belongs to them, or the game ends if the team unfortunately picks the assassin spot.
+
+The number of guesses a team has is 1 number higher than the number given to them by the Spymaster. For example, if the Spymaster gives the clue/number of guesses as, “Green, 3”, then the team can make 4 guesses (given that they guess three words correctly). Also, the guessing teammates can stop at any time as long as they have made 1 guess. If they are confused by the clue given to them, they can opt to not guess for fear of hitting the wrong clue, as long as they have made at least 1 guess.
+
+Gameplay for Codenames is that simple, really. There are a couple other rules to know. For example, instead of a specific number, the Spymaster can say, “unlimited.” That means guessers can guess as many times as they want, but have to keep in mind that they don’t have a gauge for how long they should guess for. The Spymaster can also say, “zero” for the clue, perhaps to help the guessers avoid a specific clue. The guessers still have to make at least one guess though.
+
+There are also rules regarding words that can be used. They, of course, are a little ambiguous, as they suggest deciding what to do with hyphenated words, and frown upon words that relate to the sounds of the word, but have no intrinsic meaning to the word itself. For example, to relate “mean”, “green”, and “sheen”, one could not say, “rhyming, 3”, as those words have no meaning to the word “rhyming “itself.
+
+Pros:
+So what are some reasons to play Codenames? There are a number of reasons I found this game entertaining. Let’s go over some reasons below:
+
+Easy to Learn – The game Codenames is actually really easy to learn. My instructions might not be the greatest above, and trying to explain it to someone without actually playing might be difficult, but if a new player is teamed with someone who has played before, you can simply tell that person that they have to figure out what word relates to the word their Spymaster gives them. The rest of the rules are easily picked up as the game is played. This game can be taught to almost anyone in 5 minutes or less. Well, enough to play at least.
+
+Great with Friends – Codenames is interesting because you have to figure out how people think. For people you know really well, you might have an advantage. For example, someone who says the word, “bond” that is a fan of James Bond, a friend of theirs might pick up on those types of clues if they see the words, “tank”, “golden”, and “pistol” on the board.
+
+Good Icebreaker – While Codenames is great with friends, it is also great with people you are just getting to know. It is a unique way to spark conversation, as clues are given to begin to see how they think and what their interests are without awkward conversation having to maybe directly ask these things. It also has great conversation value when the game ends because you can discuss how certain clues should have been used.
+
+It’s a Thinking Game – If you like puzzles and word games, you will have a lot of fun with this game.
+
+It’s Quick – Duration of games of Codenames don’t take too long, probably 30 minutes at the most. The first turn takes a while because there are so many words out there to guess, but once the game gets going, it’s actually pretty quick. Set up is easy, too!
+
+Cons:
+There are some reasons to not play this game, as I can certainly see this not being for everyone. Let’s go over some of the negatives now.
+
+Codenames is a Thinking Game – Yes, this was under the positives, but it can be a negative. This game takes a lot of thinking and strategy to play reasonably well. The Spymaster especially has to do a lot of thinking, and sometimes some people aren’t looking for that in a board game.
+
+Could Not Be a Fit For Some People – Some people just might not like Codenames. It certainly requires some thinking, and in a way some people might not want to, at least not on the fly. I think it could also cause arguments for people are aren’t very understanding of each other, insulting people’s clues given, especially for ultra-competitive people. This shouldn’t be a huge problem though, as I can’t really see this happen unless there is a really caustic person involved.
+
+“Accidental” Cheating – Probably the biggest annoyance about this game is the concern regarding “cheating,” because cheating is actually done almost accidentally with this game. For example, if a Spymaster says something to the effect of, “this is a stretch” prior to giving their clue, then their team knows a little more information than they should when making guesses on their words. Basically, the Spymaster is condemned to silence while playing, otherwise the other team might get angry as clues are inadvertently being given out, by pure accident.
+
+Verdict
+Ranking this game, I would give it a solid 8 out of 10. I think a lot of people would really enjoy playing Codenames as it requires some really interesting thinking. It sparks fun conversation, and is a really good time for a fairly “light-weight” game.
+
+It is particularly tough for the Spymaster, who sometimes has to figure out how to relate some pretty unrelated words with just one word. Like I had to relate “ice” and “socks.” What single word can you possibly think of to relate those two words? I could have tried to go with each word individually, which would have been easier, but it would have meant game over, as the other team had one word left. It is these sorts of moments that make the game really interesting, as you have to really dig deep to think of a word that can hopefully get your team to be on the same wavelength as you. It can be very frustrating when things go awry, and really satisfying when things go awesomely.
+
+I highly recommend giving this game a shot. If you like strategy games, and thought-provoking things, it will be a lot of fun. It is similar to Taboo, but in some ways easier and in some ways a lot harder.
